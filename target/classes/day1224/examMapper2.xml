@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="day1224">
+	<!-- update 외부 값을 사용하지 않고(parameterType 속성을 정의하지 않는다.)
+		int cnt=SqlSession객체.update("아이디");
+	-->
+	<update id="updateNoneParameter">
+  	update Board 
+  	set title='없음', content='없음', id='kim'
+  	where num=10
+	</update>
+	
+	<!-- 단일형 (기본형)으로 입력 받을 때 -->
+	<update id="updateParameter" parameterType="int">
+  	update Board 
+  	set title='없음', content='없음', id='kim'
+  	where num=#{num}
+	</update>
+	
+	<!-- 복합형 (DTO)으로 입력 받을 때
+	SqlSession.update("아이디", DTO객체)
+	 -->
+	<update id="updateCpDept" parameterType="day1219.DeptDTO">
+  	update cp_dept 
+  	set dname=#{dname}, loc=#{loc}
+  	where deptno=#{deptno}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteCpDept">
+		delete from cp_dept where deptno=90
+	</delete>
+	
+	<!-- 삭제: parameterType에는 기본형 사용가능, wrapper class 사용 가능
+		int cnt=SqlSession 객체.delete("아이디", 값"
+	 -->
+	<delete id="deleteCpDeptNo" parameterType="Integer">
+		delete from cp_dept where deptno=#{deptno}
+	</delete>
+</mapper>

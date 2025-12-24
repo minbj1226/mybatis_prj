@@ -1,6 +1,7 @@
 <%@ page import="kr.co.sist.board.BoardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <% 
 request.setCharacterEncoding("UTF-8");
@@ -8,7 +9,6 @@ request.setCharacterEncoding("UTF-8");
 <jsp:useBean id="bDTO" class="kr.co.sist.board.BoardDTO" scope="page"/>
 <jsp:setProperty name="bDTO" property="*"/>
 <%
-
 bDTO.setIp(request.getRemoteAddr());
 bDTO.setId("kim");
 
