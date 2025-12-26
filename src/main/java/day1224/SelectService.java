@@ -53,6 +53,22 @@ public class SelectService {
 		return list;
 	}//scmr
 	
+	/**
+	 * 사원번호를 입력받아 사원정보를 검색.
+	 * @param empno
+	 * @return
+	 */
+	public EmpDTO mcsr(int empno) {
+		EmpDTO eDTO=null;
+		SelectDAO sDAO=SelectDAO.getInstacne();
+		try {
+			eDTO=sDAO.mcsr(empno);
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}//end catch
+		return eDTO;
+	}//mcsr
+	
 	public List<EmpDTO> mcmr(int empno) {
 		List<EmpDTO> list=null;
 		SelectDAO sDAO=SelectDAO.getInstacne();

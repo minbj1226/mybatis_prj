@@ -6,6 +6,13 @@
 <properties resource="properties/database.properties"/>
 <typeAliases>
 <typeAlias type="day1224.EmpDTO" alias="eDTO"/>
+<typeAlias type="day1226.EmpDTO" alias="empDTO"/>
+<typeAlias type="day1226.EmpDomain" alias="empDomain"/>
+<!-- 우편번호 검색 결과를 저장할 Domain -->
+<typeAlias type="day1226.ZipcodeDomain" alias="zipDomain"/>
+<typeAlias type="day1226.EmpAllDomain" alias="eaDomain"/>
+<!-- 제조사, 모델명, 년식, 가격, 옵션, 배기량, 이미지, 입력일을 저장할 Domain -->
+<typeAlias type="day1226.CarModelDomain" alias="cmoDomain"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -23,6 +30,7 @@
     <mapper resource="day1223/examMapper.xml"/><!-- insert 연습 -->
     <mapper resource="day1224/examMapper2.xml"/><!-- delete, update 연습 -->
     <mapper resource="day1224/examMapper3.xml"/><!-- select 연습 -->
+    <mapper resource="day1226/examMapper4.xml"/><!-- select 연습2 -->
     
     <mapper resource="kr/co/sist/board/boardMapper.xml"/><!-- 사용자 게시판 쿼리 -->
   </mappers>
