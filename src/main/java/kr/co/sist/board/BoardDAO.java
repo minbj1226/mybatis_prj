@@ -61,39 +61,13 @@ public class BoardDAO {
 	}// selectBoardTotalCnt
 
 	public List<BoardDomain> selectRangeBoard(RangeDTO rDTO) throws SQLException {
-		List<BoardDomain> list = new ArrayList<BoardDomain>();
-		/*
-		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
-		 * 
-		 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-		 * 
-		 * try { // 1.JNDI 사용 객체 생성 // 2.DataSource 얻기 // 3.Connection 얻기 con =
-		 * dbCon.getConn(); // 4.쿼리문생성 객체 얻기 StringBuilder selectBoard = new
-		 * StringBuilder();
-		 * selectBoard.append("	select num, title, input_date, ip, cnt, id	")
-		 * .append("	from(select num, title, input_date, ip, cnt, id,	")
-		 * .append("	row_number() over(order by input_date desc) rnum	").
-		 * append("	from board	"); // dynamic query //dynamic query: 검색키워드가 있다면 검색 키워드에
-		 * 해당하는 글의 개수 검색 if(rDTO.getKeyword()!= null && !rDTO.getKeyword().isEmpty()) {
-		 * selectBoard.append(" where instr(")
-		 * .append(rDTO.getFieldStr()).append(",?) != 0"); }//end if
-		 * selectBoard.append(") where rnum between ? and ?	");
-		 * 
-		 * pstmt = con.prepareStatement(selectBoard.toString()); // 5.바인드 변수 값 설정 int
-		 * pstmtIdx=0; if(rDTO.getKeyword()!= null && !rDTO.getKeyword().isEmpty()) {
-		 * pstmt.setString(++pstmtIdx, rDTO.getKeyword()); }//end if
-		 * pstmt.setInt(++pstmtIdx, rDTO.getStartNum()); pstmt.setInt(++pstmtIdx,
-		 * rDTO.getEndNum()); // 6.조회 결과 얻기 BoardDTO bDTO = null;
-		 * 
-		 * rs = pstmt.executeQuery(); while (rs.next()) { bDTO = new BoardDTO();
-		 * bDTO.setNum(rs.getInt("num")); bDTO.setTitle(rs.getString("title"));
-		 * bDTO.setInput_date(rs.getDate("input_date")); bDTO.setIp(rs.getString("ip"));
-		 * bDTO.setCnt(rs.getInt("cnt")); bDTO.setId(rs.getString("id"));
-		 * 
-		 * list.add(bDTO); } // end while
-		 *  
-		 * } finally { dbCon.dbClose(rs, pstmt, con); } // end finally
-		 */		return list;
+		List<BoardDomain> list = null;
+		
+		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(false);
+		list=ss.selectList("kr.co.sist.board.selectRangeBoard", rDTO);
+		if(ss!=null) {ss.close();}
+		
+		return list;
 	}
 
 	public void insertBoard(BoardDomain bDTO) throws PersistenceException {

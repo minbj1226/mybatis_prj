@@ -60,9 +60,13 @@ public class Test {
 //			assertNotNull(sd3.dollar("cp_emp5"));
 //			assertNotNull(sd3.dynamicIf(0));
 			RangeDTO rDTO=new RangeDTO();
-			rDTO.setField("1");
-			rDTO.setKeyword("오늘은");
-			assertNotNull(bDAO.selectBoardTotalCnt(rDTO));
+//			rDTO.setField("1");
+//			rDTO.setKeyword("오늘은");
+			rDTO.setStartNum(1);
+			rDTO.setEndNum(10);
+			
+//			assertNotNull(bDAO.selectBoardTotalCnt(rDTO));
+			assertNotNull(bDAO.selectRangeBoard(rDTO));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
