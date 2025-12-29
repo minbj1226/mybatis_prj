@@ -4,7 +4,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sist.board">
 <!-- board 테이블에 추가 작업 -->
-	<insert id="insertBoard" parameterType="kr.co.sist.board.BoardDTO">
+	<insert id="insertBoard" parameterType="kr.co.sist.board.BoardDomain">
 	insert into board(num, title, content, ip, id) values( seq_board.nextval,#{title},#{content},#{ip},#{id} )
 	</insert>
+	<select id="selectBoardTotalCnt" parameterType="rangeDTO" resultType="int">
+	select count(*) cnt from board
+	<where>
+		<if test="keyword neq null and keyword neq ''">
+			instr(${fieldStr}, #{keyword})!=0
+		</if>
+	</where>
+	</select>
 </mapper>

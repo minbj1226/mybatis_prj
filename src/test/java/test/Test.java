@@ -13,6 +13,11 @@ import day1224.SelectDAO;
 import day1224.SelectService;
 import day1226.EmpDomain;
 import day1226.SelectDAO2;
+import day1229.SelectDAO3;
+import kr.co.sist.board.BoardDAO;
+import kr.co.sist.board.RangeDTO;
+import kr.co.sist.car.CarDAO;
+import kr.co.sist.car.CarService;
 
 public class Test {
 
@@ -33,15 +38,31 @@ public class Test {
 //		eDTO.setEmpno(7521);
 //		eDTO.setDeptno(30);
 		
-		SelectDAO2 sDAO=SelectDAO2.getInstacne();
+//		SelectDAO2 sDAO=SelectDAO2.getInstacne();
+//		CarDAO cDAO=CarDAO.getInstance();
+//		CarService cs=CarService.getInstance();
 //		EmpDomain ed=sDAO.useDomain(eDTO);
 //		assertNotNull(ed);
+		SelectDAO3 sd3=SelectDAO3.getInstacne();
+		BoardDAO bDAO=BoardDAO.getInstance();
 		try { 
 //			assertNotNull(sDAO.useLike("신곡동"));
 //			assertNotNull(sDAO.lessThan(3000));
 //			assertNotNull(sDAO.subquery());
 //			assertNotNull(sDAO.union());
-			assertNotNull(sDAO.join());
+//			assertNotNull(sDAO.join());
+//			assertNotNull(cDAO.selectMaker("국산"));
+//			assertNotNull(cDAO.selectModel("현대"));
+//			assertNotNull(cs.searchModel("현대"));
+//			assertNotNull(cDAO.selectCar("K5"));
+//			assertNotNull(cs.searchCar("K5"));
+//			assertNotNull(sd3.subQueryNjoin());
+//			assertNotNull(sd3.dollar("cp_emp5"));
+//			assertNotNull(sd3.dynamicIf(0));
+			RangeDTO rDTO=new RangeDTO();
+			rDTO.setField("1");
+			rDTO.setKeyword("오늘은");
+			assertNotNull(bDAO.selectBoardTotalCnt(rDTO));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

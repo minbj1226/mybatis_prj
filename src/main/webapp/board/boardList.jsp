@@ -1,7 +1,7 @@
 <%@page import="kr.co.sist.board.BoardService"%>
-<%@page import="kr.co.sist.board.BoardDTO"%>
+<%@page import="kr.co.sist.board.BoardDomain"%>
 <%@page import="java.util.List"%>
-<%@page import="kr.co.sist.board.BoardDAO2"%>
+<%@page import="kr.co.sist.board.BoardDAO"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -99,65 +99,65 @@ function checkLogin(){
          		<strong>아무말 대잔치 게시판</strong><br>
          		<jsp:useBean id="rDTO" class="kr.co.sist.board.RangeDTO" scope="page"/>
          		<jsp:setProperty property="*" name="rDTO"/>
-         		<% 
+         		<%
          		BoardService bs=BoardService.getInstance();
-         		
-         		//1. 총 게시글의 수
-         		int totalCount=bs.totalCnt(rDTO); //db에 저장되어 있는 board 테이블의 수 가져오기
-         		
-         		//2. 한 화면에 보여줄 게시글의 수
-         		int pageScale=bs.pageScale();
-         		
-				//3. 총 페이지의 수         		
-				/* int totalPage=(totalCount / pageScale);
-				
-				if(totalCount%pageScale != 0) { //딱 떨어지지 않으면 한 장이 추가로 필요
-					totalPage++; 
-				}//end if */
-				
-				int totalPage=bs.totalPage(totalCount, pageScale);
-				//4. 시작 번호
-				String tempPage=request.getParameter("currentPage");
-				
-				int currentPage=1;
-				// 최초 호출, 외부에 편집
-				if(tempPage!=null) { // 사용자가 pagination을 클릭하여 정상적인 값이 입력된 경우
-					try{
-						currentPage=Integer.parseInt(tempPage);
-					} catch(NumberFormatException ne){
-						
-					}//end catch
-				}//end if
-				int startNum=bs.startNum(currentPage, pageScale);
-				//5. 끝 번호
-				int endNum=bs.endNum(startNum, pageScale);
-				
-				//rDTO는 시작번호와 끝 번호를 web parameter로 받지 않고
-				//연산된 값(위 1항~5항)으로 설정 한다.
-				rDTO.setStartNum(startNum);
-				rDTO.setEndNum(endNum);
-				//6. 시작 번호와 끝 번호 사이에 해당하는 게시글을 조회
-				List<BoardDTO> boardList=bs.searchBoardList(rDTO);
-				//글 제목이 20글자를 초과하면 19자까지만 보여주고 나머지는 ...
-				bs.titleSubStr(boardList);
-				rDTO.setUrl("boardList.jsp");
-				rDTO.setTotalPage(totalPage);
-				
-				String pagination=bs.pagination(rDTO);
-				//7. pagination
-				/* StringBuilder pagination=new StringBuilder();
-				for(int i=1; i<totalPage+1; i++) {
-					pagination.append("")
-				} */
-				
-         		pageContext.setAttribute("totalCount", totalCount);
-				pageContext.setAttribute("pageScale", pageScale);
-				pageContext.setAttribute("totalPage", totalPage);
-				pageContext.setAttribute("currentPage", currentPage);
-				pageContext.setAttribute("startNum", startNum);
-				pageContext.setAttribute("endNum", endNum);
-				pageContext.setAttribute("boardList", boardList);
-				pageContext.setAttribute("pagination", pagination);
+         		         		
+         		         		//1. 총 게시글의 수
+         		         		int totalCount=bs.totalCnt(rDTO); //db에 저장되어 있는 board 테이블의 수 가져오기
+         		         		
+         		         		//2. 한 화면에 보여줄 게시글의 수
+         		         		int pageScale=bs.pageScale();
+         		         		
+         				//3. 총 페이지의 수         		
+         				/* int totalPage=(totalCount / pageScale);
+         				
+         				if(totalCount%pageScale != 0) { //딱 떨어지지 않으면 한 장이 추가로 필요
+         					totalPage++; 
+         				}//end if */
+         				
+         				int totalPage=bs.totalPage(totalCount, pageScale);
+         				//4. 시작 번호
+         				String tempPage=request.getParameter("currentPage");
+         				
+         				int currentPage=1;
+         				// 최초 호출, 외부에 편집
+         				if(tempPage!=null) { // 사용자가 pagination을 클릭하여 정상적인 값이 입력된 경우
+         					try{
+         						currentPage=Integer.parseInt(tempPage);
+         					} catch(NumberFormatException ne){
+         						
+         					}//end catch
+         				}//end if
+         				int startNum=bs.startNum(currentPage, pageScale);
+         				//5. 끝 번호
+         				int endNum=bs.endNum(startNum, pageScale);
+         				
+         				//rDTO는 시작번호와 끝 번호를 web parameter로 받지 않고
+         				//연산된 값(위 1항~5항)으로 설정 한다.
+         				rDTO.setStartNum(startNum);
+         				rDTO.setEndNum(endNum);
+         				//6. 시작 번호와 끝 번호 사이에 해당하는 게시글을 조회
+         				List<BoardDomain> boardList=bs.searchBoardList(rDTO);
+         				//글 제목이 20글자를 초과하면 19자까지만 보여주고 나머지는 ...
+         				bs.titleSubStr(boardList);
+         				rDTO.setUrl("boardList.jsp");
+         				rDTO.setTotalPage(totalPage);
+         				
+         				String pagination=bs.pagination(rDTO);
+         				//7. pagination
+         				/* StringBuilder pagination=new StringBuilder();
+         				for(int i=1; i<totalPage+1; i++) {
+         					pagination.append("")
+         				} */
+         				
+         		         		pageContext.setAttribute("totalCount", totalCount);
+         				pageContext.setAttribute("pageScale", pageScale);
+         				pageContext.setAttribute("totalPage", totalPage);
+         				pageContext.setAttribute("currentPage", currentPage);
+         				pageContext.setAttribute("startNum", startNum);
+         				pageContext.setAttribute("endNum", endNum);
+         				pageContext.setAttribute("boardList", boardList);
+         				pageContext.setAttribute("pagination", pagination);
          		%>
          		
          		<%-- 총 게시글의 수: <c:out value="${totalCount}"/><br>

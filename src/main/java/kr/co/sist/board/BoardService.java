@@ -24,7 +24,7 @@ public class BoardService {
 
 	public int totalCnt(RangeDTO rDTO) { 
 		int totalCnt=0;
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+		BoardDAO bDAO=BoardDAO.getInstance();
 		
 		try {
 			totalCnt=bDAO.selectBoardTotalCnt(rDTO);
@@ -62,10 +62,10 @@ public class BoardService {
 	
 	
 	
-	public boolean addBoard(BoardDTO bDTO) throws PersistenceException{
+	public boolean addBoard(BoardDomain bDTO) throws PersistenceException{
 		boolean flag=false;
 		
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+		BoardDAO bDAO=BoardDAO.getInstance();
 		try {
 			bDAO.insertBoard(bDTO);
 			flag=true;
@@ -81,9 +81,9 @@ public class BoardService {
 	 * @param rDto
 	 * @return
 	 */
-	public List<BoardDTO> searchBoardList(RangeDTO rDTO) {
-		List<BoardDTO> list=null;
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+	public List<BoardDomain> searchBoardList(RangeDTO rDTO) {
+		List<BoardDomain> list=null;
+		BoardDAO bDAO=BoardDAO.getInstance();
 		
 		try {
 			list=bDAO.selectRangeBoard(rDTO);
@@ -98,9 +98,9 @@ public class BoardService {
 	 * 제목이 20자를 초과하면 19자까지 보여주고 뒤에 ...을 붙이는 일
 	 * @param list
 	 */
-	public void titleSubStr(List<BoardDTO> boardList) {
+	public void titleSubStr(List<BoardDomain> boardList) {
 		String title="";
-		for(BoardDTO bDTO:boardList) {
+		for(BoardDomain bDTO:boardList) {
 			title=bDTO.getTitle();
 			if(title.length()>19) {
 				bDTO.setTitle(title.substring(0, 19)+ "...");
@@ -192,9 +192,9 @@ public class BoardService {
 	 * @param num
 	 * @return
 	 */
-	public BoardDTO searchOneBoard(int num) {
-		BoardDTO bDTO=null;
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+	public BoardDomain searchOneBoard(int num) {
+		BoardDomain bDTO=null;
+		BoardDAO bDAO=BoardDAO.getInstance();
 		try {
 			bDTO=bDAO.selectBoardDetail(num);
 		} catch(SQLException se){
@@ -205,7 +205,7 @@ public class BoardService {
 	}
 	
 	public void modifyBoardCnt(int num) {
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+		BoardDAO bDAO=BoardDAO.getInstance();
 		try {
 			bDAO.updateBoardCnt(num);
 		} catch(SQLException se){
@@ -213,10 +213,10 @@ public class BoardService {
 		}//end catch
 	}//modifyBoardCnt
 	
-	public boolean modifyBoard(BoardDTO bDTO) {
+	public boolean modifyBoard(BoardDomain bDTO) {
 		boolean flag=false;
 		
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+		BoardDAO bDAO=BoardDAO.getInstance();
 		
 		try {
 			flag=bDAO.updateBoard(bDTO)==1;
@@ -226,10 +226,10 @@ public class BoardService {
 		return flag;
 	}
 	
-	public boolean removeBoard(BoardDTO bDTO) {
+	public boolean removeBoard(BoardDomain bDTO) {
 		boolean flag=false;
 		
-		BoardDAO2 bDAO=BoardDAO2.getInstance();
+		BoardDAO bDAO=BoardDAO.getInstance();
 		
 		try {
 			flag=bDAO.deleteBoard(bDTO)==1;

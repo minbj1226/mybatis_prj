@@ -14,16 +14,16 @@ import org.apache.ibatis.session.SqlSession;
  
 import kr.co.sist.dao.MyBatisHandler;
 
-public class BoardDAO2 {
-	private static BoardDAO2 bDAO;
+public class BoardDAO {
+	private static BoardDAO bDAO;
 
-	private BoardDAO2() {
+	private BoardDAO() {
 
 	}
  
-	public static BoardDAO2 getInstance() {
+	public static BoardDAO getInstance() {
 		if (bDAO == null) {
-			bDAO = new BoardDAO2();
+			bDAO = new BoardDAO();
 		} // end if
 		return bDAO;
 	}// getInstance
@@ -34,6 +34,10 @@ public class BoardDAO2 {
 	 */
 	public int selectBoardTotalCnt(RangeDTO rDTO) throws SQLException {
 		int totalCnt = 0;
+		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(false);
+		totalCnt=ss.selectOne("kr.co.sist.board.selectBoardTotalCnt", rDTO);
+		if(ss!=null) {ss.close();}
+		return totalCnt;
 		/*
 		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
 		 * 
@@ -54,11 +58,10 @@ public class BoardDAO2 {
 		 * 
 		 * } finally { dbCon.dbClose(rs, pstmt, null); } // end finally
 		 */
-		return totalCnt;
 	}// selectBoardTotalCnt
 
-	public List<BoardDTO> selectRangeBoard(RangeDTO rDTO) throws SQLException {
-		List<BoardDTO> list = new ArrayList<BoardDTO>();
+	public List<BoardDomain> selectRangeBoard(RangeDTO rDTO) throws SQLException {
+		List<BoardDomain> list = new ArrayList<BoardDomain>();
 		/*
 		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
 		 * 
@@ -93,7 +96,7 @@ public class BoardDAO2 {
 		 */		return list;
 	}
 
-	public void insertBoard(BoardDTO bDTO) throws PersistenceException {
+	public void insertBoard(BoardDomain bDTO) throws PersistenceException {
 		//1.MyBatis Handler얻기
 		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(true);
 		//2.쿼리문 수행 후 결과 얻기 
@@ -103,8 +106,8 @@ public class BoardDAO2 {
 		//4.MyBatis Handler닫기 
 	}// insertBoard 
  
-	public BoardDTO selectBoardDetail(int num) throws SQLException {
-		BoardDTO bDTO = null;
+	public BoardDomain selectBoardDetail(int num) throws SQLException {
+		BoardDomain bDTO = null;
 
 		/*
 		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
@@ -159,7 +162,7 @@ public class BoardDAO2 {
 		
 	} // updateBoardDetail
 
-	public int updateBoard(BoardDTO bDTO) throws SQLException {
+	public int updateBoard(BoardDomain bDTO) throws SQLException {
 		int cnt=0;
 		
 		/*
@@ -181,7 +184,7 @@ public class BoardDAO2 {
 		 */		return cnt;
 	}// updateBoard
 
-	public int deleteBoard(BoardDTO bDTO) throws SQLException {
+	public int deleteBoard(BoardDomain bDTO) throws SQLException {
 		int cnt=0;
 		
 		/*
