@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.sist.board">
 <!-- board 테이블에 추가 작업 -->
-	<insert id="insertBoard" parameterType="kr.co.sist.board.BoardDomain">
+	<insert id="insertBoard" parameterType="boardDTO">
 	insert into board(num, title, content, ip, id) values( seq_board.nextval,#{title},#{content},#{ip},#{id} )
 	</insert>
 	
@@ -28,4 +28,30 @@
 		</where>
 	) where rnum between #{startNum} and #{endNum}
 	</select>
+	
+	<!-- 글 번호를 받아서 해당하는 글 하나를 검색 -->
+	<select id="selectBoardDetail" parameterType="int" resultType="boardDomain">
+	select title, content, input_date, ip, cnt, id
+	from board
+	where num=#{num}
+	</select>
+	
+	<!-- 글 번호를 받아서 해당 글의 카운트를 증가 -->
+	<update id="updateBoardCnt" parameterType="int">
+	update board
+	set cnt=cnt+1
+	where num=#{num}
+	</update>
+	
+	<!-- 글번호와 id를 입력받아서 해당 글에 내용과 ip를 변경 -->
+	<update id="updateBoard" parameterType="boardDTO">
+	update board 
+	set content=#{content}, ip=#{ip}
+	where num=#{num}	and id=#{id}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="boardDTO">
+	delete from board
+	where num=#{num}	and id=#{id}
+	</delete>
 </mapper>

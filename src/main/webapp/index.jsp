@@ -72,13 +72,14 @@ $(function(){
         		 new UrlVo("subquery & join", "day1229/subqueryNjoin"),
         		 new UrlVo("dollar sign", "day1229/dollar"),
         		 new UrlVo("dynamic query & if", "day1229/dynamicIf"),
-        		 new UrlVo("dynamic query & choose", ""),
-        		 new UrlVo("dynamic query & forEach", ""),
-        		 new UrlVo("dynamic query & set", ""),
-        		 new UrlVo(" PL/SQL insert", ""),
-        		 new UrlVo(" PL/SQL update", ""),
-        		 new UrlVo(" PL/SQL delete", ""),
-        		 new UrlVo(" PL/SQL cursor", "")
+        		 new UrlVo("dynamic query & choose", "day1230/dynamicChoose"),
+        		 new UrlVo("dynamic query & forEach", "day1230/dynamicForEach"),
+        		 new UrlVo("dynamic query & set", "day1230/dynamicSet"),
+        		 new UrlVo("transaction", "day1230/transaction"),
+        		 new UrlVo(" PL/SQL insert", "day1231/plInsert"),
+        		 new UrlVo(" PL/SQL update", "day1231/plUpdate"),
+        		 new UrlVo(" PL/SQL delete", "day1231/plDelete"),
+        		 new UrlVo(" PL/SQL cursor", "day1231/plCursor")
          };
          
          pageContext.setAttribute("urlArr", urlArr);

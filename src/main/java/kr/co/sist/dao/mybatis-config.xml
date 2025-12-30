@@ -14,8 +14,13 @@
 <!-- 제조사, 모델명, 년식, 가격, 옵션, 배기량, 이미지, 입력일을 저장할 Domain -->
 <typeAlias type="day1226.CarModelDomain" alias="cmoDomain"/>
 <!-- 게시판에서 사용할 DTO, Domain  -->
+<!-- 검색에 사용할 Domain -->
 <typeAlias type="kr.co.sist.board.BoardDomain" alias="boardDomain"/>
+<!-- 추가, 삭제, 변경에 사용할 DTO -->
+<typeAlias type="kr.co.sist.board.BoardDTO" alias="boardDTO"/>
+<!-- 검색에 사용할 DTO -->
 <typeAlias type="kr.co.sist.board.RangeDTO" alias="rangeDTO"/>
+<typeAlias type="day1230.TransactionDTO" alias="transactionDTO"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -35,6 +40,7 @@
     <mapper resource="day1224/examMapper3.xml"/><!-- select 연습 -->
     <mapper resource="day1226/examMapper4.xml"/><!-- select 연습2 -->
     <mapper resource="day1229/examMapper5.xml"/><!-- select 연습2 -->
+    <mapper resource="day1230/examMapper6.xml"/><!-- select 연습2 -->
     
     <mapper resource="kr/co/sist/board/boardMapper.xml"/><!-- 사용자 게시판 쿼리 -->
     <mapper resource="kr/co/sist/car/carMapper.xml"/><!-- 차량 조회 쿼리 -->

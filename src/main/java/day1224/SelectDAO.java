@@ -1,6 +1,5 @@
 package day1224;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.exceptions.PersistenceException;

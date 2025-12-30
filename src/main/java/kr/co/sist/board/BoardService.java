@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 
-import oracle.security.o3logon.a;
-
 public class BoardService {
 	private static BoardService bs;
 	
@@ -62,7 +60,7 @@ public class BoardService {
 	
 	
 	
-	public boolean addBoard(BoardDomain bDTO) throws PersistenceException{
+	public boolean addBoard(BoardDTO bDTO) throws PersistenceException{
 		boolean flag=false;
 		
 		BoardDAO bDAO=BoardDAO.getInstance();
@@ -213,7 +211,7 @@ public class BoardService {
 		}//end catch
 	}//modifyBoardCnt
 	
-	public boolean modifyBoard(BoardDomain bDTO) {
+	public boolean modifyBoard(BoardDTO bDTO) {
 		boolean flag=false;
 		
 		BoardDAO bDAO=BoardDAO.getInstance();
@@ -226,7 +224,7 @@ public class BoardService {
 		return flag;
 	}
 	
-	public boolean removeBoard(BoardDomain bDTO) {
+	public boolean removeBoard(BoardDTO bDTO) {
 		boolean flag=false;
 		
 		BoardDAO bDAO=BoardDAO.getInstance();

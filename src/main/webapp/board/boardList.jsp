@@ -79,7 +79,6 @@ function checkLogin(){
 }//checkLogin
 </script>
 
-
 </head>
 <body>
    <header data-bs-theme="dark">

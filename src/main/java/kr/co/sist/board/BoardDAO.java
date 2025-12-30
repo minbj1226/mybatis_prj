@@ -1,17 +1,11 @@
 package kr.co.sist.board;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
- 
+
 import kr.co.sist.dao.MyBatisHandler;
 
 public class BoardDAO {
@@ -70,7 +64,7 @@ public class BoardDAO {
 		return list;
 	}
 
-	public void insertBoard(BoardDomain bDTO) throws PersistenceException {
+	public void insertBoard(BoardDTO bDTO) throws PersistenceException {
 		//1.MyBatis Handler얻기
 		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(true);
 		//2.쿼리문 수행 후 결과 얻기 
@@ -81,102 +75,53 @@ public class BoardDAO {
 	}// insertBoard 
  
 	public BoardDomain selectBoardDetail(int num) throws SQLException {
-		BoardDomain bDTO = null;
+		BoardDomain bDomain = null;
+		//1.MyBatis Handler얻기
+		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(true);
+		//2.쿼리문 수행 후 결과 얻기 
+		bDomain=ss.selectOne("kr.co.sist.board.selectBoardDetail", num);
+		//3.결과 작업
+		if(ss!=null) {ss.close();}
+		//4.MyBatis Handler닫기 
 
-		/*
-		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
-		 * 
-		 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-		 * 
-		 * try { con = dbCon.getConn();
-		 * 
-		 * StringBuilder selectDetail = new StringBuilder();
-		 * selectDetail.append(" select title, content, input_date, ip, cnt, id ").
-		 * append(" from board ") .append(" where num=? ");
-		 * 
-		 * pstmt = con.prepareStatement(selectDetail.toString()); pstmt.setInt(1, num);
-		 * rs = pstmt.executeQuery();
-		 * 
-		 * if (rs.next()) { bDTO = new BoardDTO(); bDTO.setTitle(rs.getString("title"));
-		 * 
-		 * // --- CLOB → String 변환 --- StringBuilder content = new StringBuilder();
-		 * 
-		 * try (BufferedReader br = new
-		 * BufferedReader(rs.getClob("content").getCharacterStream())) {
-		 * 
-		 * String line; while ((line = br.readLine()) != null) { content.append(line); }
-		 * 
-		 * } catch (IOException | NullPointerException e) { e.printStackTrace(); }
-		 * 
-		 * bDTO.setContent(content.toString());
-		 * bDTO.setInput_date(rs.getDate("input_date")); bDTO.setIp(rs.getString("ip"));
-		 * bDTO.setCnt(rs.getInt("cnt")); bDTO.setId(rs.getString("id")); }
-		 * 
-		 * } finally { dbCon.dbClose(rs, pstmt, con); }
-		 */
-		return bDTO;
+		return bDomain;
 	} // insertBoardDetail
 	
 	public void updateBoardCnt(int num) throws SQLException {
-		//DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
-		/*
-		 * Connection con = null; PreparedStatement pstmt = null;
-		 * 
-		 * try { con = dbCon.getConn();
-		 * 
-		 * StringBuilder updateCnt = new StringBuilder(); updateCnt
-		 * .append(" update board ") .append(" set cnt=cnt+1 ")
-		 * .append(" where num=? ");
-		 * 
-		 * pstmt = con.prepareStatement(updateCnt.toString());
-		 * 
-		 * pstmt.setInt(1, num); pstmt.executeUpdate(); } finally { dbCon.dbClose(null,
-		 * pstmt, con); }
-		 */
+		//1.MyBatis Handler얻기
+		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(true);
+		//2.쿼리문 수행 후 결과 얻기 
+		ss.update("kr.co.sist.board.updateBoardCnt", num);
+		//3.결과 작업
+		if(ss!=null) {ss.close();}
+		//4.MyBatis Handler닫기 
 		
 	} // updateBoardDetail
 
-	public int updateBoard(BoardDomain bDTO) throws SQLException {
+	public int updateBoard(BoardDTO bDTO) throws SQLException {
 		int cnt=0;
 		
-		/*
-		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
-		 * 
-		 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-		 * 
-		 * try { con = dbCon.getConn(); StringBuilder updateBoard = new StringBuilder();
-		 * updateBoard .append("	update board	")
-		 * .append("	set content=?, ip=?	") .append("	where num=?	and id=?");
-		 * 
-		 * pstmt=con.prepareStatement(updateBoard.toString());
-		 * 
-		 * pstmt.setString(1, bDTO.getContent()); pstmt.setString(2, bDTO.getIp());
-		 * pstmt.setInt(3, bDTO.getNum()); pstmt.setString(4, bDTO.getId());
-		 * 
-		 * cnt=pstmt.executeUpdate(); } finally { dbCon.dbClose(rs, pstmt, null); } //
-		 * end finally
-		 */		return cnt;
+		//1.MyBatis Handler얻기
+		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(true);
+		//2.쿼리문 수행 후 결과 얻기 
+		cnt=ss.update("kr.co.sist.board.updateBoard", bDTO);
+		//3.결과 작업
+		if(ss!=null) {ss.close();}
+		//4.MyBatis Handler닫기 
+		return cnt;
+		 
 	}// updateBoard
 
-	public int deleteBoard(BoardDomain bDTO) throws SQLException {
+	public int deleteBoard(BoardDTO bDTO) throws SQLException {
 		int cnt=0;
-		
-		/*
-		 * DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
-		 * 
-		 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-		 * 
-		 * try { con = dbCon.getConn(); StringBuilder deleteBoard = new StringBuilder();
-		 * deleteBoard .append("	delete from board	")
-		 * .append("	where num=?	and id=?");
-		 * 
-		 * pstmt=con.prepareStatement(deleteBoard.toString());
-		 * 
-		 * pstmt.setInt(1, bDTO.getNum()); pstmt.setString(2, bDTO.getId());
-		 * 
-		 * cnt=pstmt.executeUpdate(); } finally { dbCon.dbClose(rs, pstmt, null); } //
-		 * end finally
-		 */		return cnt;
+		//1.MyBatis Handler얻기
+		SqlSession ss=MyBatisHandler.getInstance().getMyBatisHandler(true);
+		//2.쿼리문 수행 후 결과 얻기 
+		cnt=ss.delete("kr.co.sist.board.deleteBoard", bDTO);
+		//3.결과 작업
+		if(ss!=null) {ss.close();}
+		//4.MyBatis Handler닫기 
+		return cnt;
 	}// updateBoard
 	
 }// class

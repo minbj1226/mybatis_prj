@@ -13,7 +13,7 @@
   		int tempNum=Integer.parseInt(num);
   		Object obj=session.getAttribute(String.valueOf(tempNum));
   		if(obj==null) {
-  	bs.modifyBoardCnt(tempNum); //세션에 값이 없을때만 카운트를 올림
+  		bs.modifyBoardCnt(tempNum); //세션에 값이 없을때만 카운트를 올림
   		}
   		
   		BoardDomain bDTO=bs.searchOneBoard(Integer.parseInt(num));
@@ -83,9 +83,6 @@
 	href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css"
 	rel="stylesheet" />
 	
-<c:if test="${sessionScope.userId == null }">
-	<c:redirect url="${CommonURL }/login/loginFrm.jsp" />
-</c:if>
 <script type="text/javascript">
 	$(function() {
 		$('#content').summernote(
@@ -173,11 +170,11 @@
 							</tr>
 							<tr>
 								<td colspan="2" style="text-align: center;">
-									<c:if test="${ sessionScope.userId eq bDTO.id}">
 									<input type="hidden" name="num" value="${param.num}"/>
+									<!-- 작성자의 아이디를 넣었다. -->
+									<input type="hidden" name="id" value="${bDTO.id}"/>
 									<button onclick="return false" class="btn btn-success" id="btnModify">글수정</button> 
 									<button onclick="return false" class="btn btn-success" id="btnDelete">글삭제</button> 
-									</c:if>
 									<a href="boardList.jsp" class="btn btn info">리스트</a>
 								</td>
 							</tr>
