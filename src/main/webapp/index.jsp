@@ -77,9 +77,8 @@ $(function(){
         		 new UrlVo("dynamic query & set", "day1230/dynamicSet"),
         		 new UrlVo("transaction", "day1230/transaction"),
         		 new UrlVo(" PL/SQL insert", "day1231/plInsert"),
-        		 new UrlVo(" PL/SQL update", "day1231/plUpdate"),
-        		 new UrlVo(" PL/SQL delete", "day1231/plDelete"),
-        		 new UrlVo(" PL/SQL cursor", "day1231/plCursor")
+        		 new UrlVo(" PL/SQL cursor 한행", "day1231/plCursor"),
+        		 new UrlVo(" PL/SQL cursor 여러행", "day1231/plCursor2")
          };
          
          pageContext.setAttribute("urlArr", urlArr);

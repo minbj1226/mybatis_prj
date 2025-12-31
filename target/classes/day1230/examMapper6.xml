@@ -34,7 +34,7 @@
 	배열로 입력되는 모든 사원번호에 해당하는 사원들을 검색.
 	
 	-->
-	<select id="dynamicForEach" parameterType="hashMap" resultType="eaDomain">
+	<select id="dynamicForEach" parameterType="hashMap" resultType="eaDomain" statementType="CALLABLE">
 	select empno, ename, job, sal, hiredate, deptno
 	from emp
 	where empno in
